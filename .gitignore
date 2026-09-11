@@ -1,0 +1,9 @@
+# binário compilado
+/jogo
+
+# editor / SO
+*.swp
+*.swo
+.DS_Store
+
+build/
