@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 typedef struct {
-  char *name;
+  const char *name;
   int life;
   int strength;
 } Entity;

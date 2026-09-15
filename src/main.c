@@ -30,20 +30,14 @@ void entitysAdd(Entitys *entitys, Entity newEntity) {
     printf("---LOG: Vetor de inimigos cheio---\n");
     return;
   }
-
   entitys->list[entitys->size++] = newEntity;
 }
 
 void entitysRemove(Entitys *entitys, int target) {
-  // TODO: remover os inimigos mas realocando o vetor para a esquerda a partir
-  // da posicão que foi eliminada.
-
   for (int i = target; i <= entitys->size - 1; i++) {
     entitys->list[i] = entitys->list[i + 1];
   }
-
   entitys->size--;
-  // entitys->list[target] = entitys->list[--entitys->size];
 }
 
 void entitysShowAll(Entitys *entitys) {
@@ -65,6 +59,7 @@ void combat(Entity *player, Entitys *enemys) {
       entitysShowAll(enemys);
       printf("> ");
       scanf("%d", &target);
+      getchar();
       if (entityAttack(player, &enemys->list[target])) {
         printf("Player eliminiu %s %d\n", enemys->list[target].name, target);
         entitysRemove(enemys, target);
@@ -81,7 +76,7 @@ void combat(Entity *player, Entitys *enemys) {
     }
 
     if (entityAttack(player, &enemys->list[0])) {
-      printf("Player eliminiu todos os inimigos\n");
+      printf("Player eliminiu todos os inimigos, combate finalizado\n");
       break;
     }
 
@@ -90,26 +85,25 @@ void combat(Entity *player, Entitys *enemys) {
              enemys->list[0].name);
       break;
     }
+
+    printf("clique em qualuqer botão para continuar ...\n");
+    getchar();
   }
 }
 
 int main(void) {
   Entity player = entityCreate(entityType_human);
-  printf("Log: ok\n");
-
-  // TODO: erro na funcão ao setar o nome, função encerando programa.
-
   entitySetName(&player, "Wallace");
-  printf("Log: ok 2\n");
+
   Entitys enemys = entitysCreat(5);
-  printf("Log: ok 3\n");
+  entitysAdd(&enemys, entityCreate(entityType_goblin));
+  entitysAdd(&enemys, entityCreate(entityType_goblin));
+  entitysAdd(&enemys, entityCreate(entityType_goblin));
 
-  /*
-    entitysAdd(&enemys, entityCreate(entityType_goblin));
-    entitysAdd(&enemys, entityCreate(entityType_human));
-    entitysAdd(&enemys, entityCreate(entityType_ork));
+  combat(&player, &enemys);
 
-    combat(&player, &enemys);
-  */
+  getchar();
+  printf("Fim de jogo ...\n");
+  getchar();
   return 0;
 }

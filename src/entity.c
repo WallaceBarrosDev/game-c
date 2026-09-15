@@ -7,15 +7,16 @@ Entity entityCreate(EntityType entityType) {
   Entity entity;
 
   switch (entityType) {
+  case entityType_goblin:
+    entity.name = "Goblin";
+    entity.life = 40;
+    entity.strength = 10;
+    break;
   case entityType_human:
     entity.name = "Human";
     entity.life = 100;
     entity.strength = 25;
     break;
-  case entityType_goblin:
-    entity.name = "Goblin";
-    entity.life = 50;
-    entity.strength = 10;
   case entityType_ork:
     entity.name = "Ork";
     entity.life = 65;
@@ -27,7 +28,7 @@ Entity entityCreate(EntityType entityType) {
 }
 
 void entitySetName(Entity *entity, const char *newName) {
-  strcpy(entity->name, newName);
+  entity->name = newName;
 }
 
 bool entityAttack(Entity *attacker, Entity *target) {
