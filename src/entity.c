@@ -1,6 +1,7 @@
 #include "entity.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 Entity entityCreate(EntityType entityType) {
   Entity entity;
@@ -15,6 +16,10 @@ Entity entityCreate(EntityType entityType) {
     entity.name = "Goblin";
     entity.life = 50;
     entity.strength = 10;
+  case entityType_ork:
+    entity.name = "Ork";
+    entity.life = 65;
+    entity.strength = 20;
     break;
   }
 
@@ -22,7 +27,7 @@ Entity entityCreate(EntityType entityType) {
 }
 
 void entitySetName(Entity *entity, const char *newName) {
-  entity->name = newName;
+  strcpy(entity->name, newName);
 }
 
 bool entityAttack(Entity *attacker, Entity *target) {

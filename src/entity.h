@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 typedef struct {
-  const char *name;
+  char *name;
   int life;
   int strength;
 } Entity;
@@ -12,6 +12,7 @@ typedef struct {
 typedef enum {
   entityType_human,
   entityType_goblin,
+  entityType_ork,
 } EntityType;
 
 Entity entityCreate(EntityType entityType);
