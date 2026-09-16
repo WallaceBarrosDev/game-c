@@ -15,12 +15,20 @@ typedef enum {
   GamePhase_stop,
 } GamePhase;
 
+typedef enum {
+  GameMenuStatus_init,
+  GameMenuStatus_new,
+  GameMenuStatus_continue,
+  GameMenuStatus_exit,
+} GameMenuStatus;
+
 typedef enum { GameError_none, GameError_invalidOption } GameError;
 
 typedef struct {
   GameStatus status;
   GamePhase phase;
   GameError error;
+  GameMenuStatus menuStatus;
   char input[MAX_STRING];
 } Game;
 

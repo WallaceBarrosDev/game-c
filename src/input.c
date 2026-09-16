@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 void input() {
-  if (game.phase == GamePhase_stop)
+  if (game.menuStatus == GameMenuStatus_exit)
     return;
 
   scanf("%s", game.input);

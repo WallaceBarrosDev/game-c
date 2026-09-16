@@ -8,6 +8,7 @@ Game game = {
     .status = GameStatus_run,
     .phase = GamePhase_init,
     .error = GameError_none,
+    .menuStatus = GameMenuStatus_init,
     .input = "",
 };
 

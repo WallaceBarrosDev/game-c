@@ -10,7 +10,7 @@ void render_list(char **list, int size) {
   }
 }
 
-void render_init() {
+void render_menu() {
   render_msg("=>> Bem vindo <<=");
   render_msg("selecione uma opção:\n");
   render_list((char *[]){"Novo Game", "Continuar", "Sair"}, 3);
@@ -30,9 +30,22 @@ void render() {
     return;
   }
 
+  switch (game.menuStatus) {
+  case GameMenuStatus_init:
+    render_menu();
+    return;
+  case GameMenuStatus_new:
+    break;
+  case GameMenuStatus_continue:
+    break;
+  case GameMenuStatus_exit:
+    render_end();
+    break;
+  }
+
   switch (game.phase) {
   case GamePhase_init:
-    render_init();
+    // render_init();
     game.phase = GamePhase_input;
     break;
   case GamePhase_input:
