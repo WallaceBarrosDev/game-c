@@ -1,7 +1,6 @@
 #include "entity.h"
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
 Entity entityCreate(EntityType entityType) {
   Entity entity;

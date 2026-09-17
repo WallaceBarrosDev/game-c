@@ -13,12 +13,24 @@ void render_list(char **list, int size) {
 void render_menu() {
   render_msg("=>> Bem vindo <<=");
   render_msg("selecione uma opção:\n");
-  render_list((char *[]){"Novo Game", "Continuar", "Sair"}, 3);
+  render_list((char *[]){"Novo Jogo", "Continuar", "Sair"}, 3);
   printf("\n> ");
 }
 void render_input() { printf("Input game %s\n", game.input); }
 void render_end() { printf("saindo do game ...\n"); }
-void render_invalidOption() { printf("Opção invalida, digite novamente\n> "); }
+void render_invalidOption() { printf("Opção invalida, digite novamente\n"); }
+void render_notImplemetetion() {
+  printf("Opção em desenvolvimento, selecione outra\n> ");
+}
+
+void render_newGame() { printf("Inciando novo jogo\n"); }
+
+void render_game() {
+  char *name = "Jogador";
+
+  printf("Caregando jogo ...\n");
+  printf("Bem vindo de volta %s !!!", name);
+}
 
 void render() {
   switch (game.error) {
@@ -30,28 +42,19 @@ void render() {
     return;
   }
 
-  switch (game.menuStatus) {
-  case GameMenuStatus_init:
+  switch (game.menu) {
+  case GameMenu_none:
     render_menu();
     return;
-  case GameMenuStatus_new:
-    break;
-  case GameMenuStatus_continue:
-    break;
-  case GameMenuStatus_exit:
+  case GameMenu_new:
+    render_newGame();
+    render_notImplemetetion();
+    return;
+  case GameMenu_continue:
+    render_game();
+    return;
+  case GameMenu_exit:
     render_end();
-    break;
-  }
-
-  switch (game.phase) {
-  case GamePhase_init:
-    // render_init();
-    game.phase = GamePhase_input;
-    break;
-  case GamePhase_input:
-    break;
-  case GamePhase_stop:
-    render_end();
-    break;
+    return;
   }
 }
